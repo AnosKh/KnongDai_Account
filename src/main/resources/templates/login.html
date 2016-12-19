@@ -107,6 +107,10 @@
 			<a style="width:100%" class="go" id="btGOOGLE" href="#/google/signin" th:href="@{#/google/signin}"><i class="anc-go"> </i><span>Google+</span></a>
 		</div>
 		
+		<div class="button">
+			<a style="width:100%" class="tw" id="btTWITTER" href="#/twitter/signin" th:href="@{#/twitter/signin}"><i class="anc-tw"> </i><span>Twitter</span></a>
+		</div>
+		
 		<div class="or-container">
                 <hr class="or-hr">
                 <h2 id="or">OR</h2>
@@ -181,6 +185,9 @@
     			location.href = "/google/signin?continue-site="+$("#continueSite").text();
         	});
         	
+        	$("#btTWITTER").click(function(e){
+    			location.href = "/twitter/signin?continue-site="+$("#continueSite").text();
+        	});
         	
         	
         	
