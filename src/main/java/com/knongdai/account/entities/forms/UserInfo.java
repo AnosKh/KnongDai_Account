@@ -26,7 +26,7 @@ public class UserInfo {
 	@JsonProperty("REGISTERED_DATE")
 	private Date registeredDate;
 	
-	@JsonProperty("USER_IAMGE_URL")
+	@JsonProperty("USER_IMAGE_URL")
 	private String userImageUrl;
 	
 	@JsonProperty("PHONENUMBER")
@@ -34,6 +34,10 @@ public class UserInfo {
 	
 	@JsonProperty("POINT")
 	private int point;
+	
+	
+	@JsonProperty("STATUS")
+	private String status;
 	
 	@JsonProperty("ROLES")
 	private List<Role> roles;
@@ -116,6 +120,14 @@ public class UserInfo {
 
 	public void setUserHash(String userHash) {
 		this.userHash = userHash;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

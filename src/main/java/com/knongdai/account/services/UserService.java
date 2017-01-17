@@ -5,6 +5,7 @@ package com.knongdai.account.services;
 import com.knongdai.account.entities.User;
 import com.knongdai.account.entities.UserRegister;
 import com.knongdai.account.entities.forms.FrmSocailUser;
+import com.knongdai.account.entities.forms.FrmUpdateUser;
 import com.knongdai.account.entities.forms.FrmUserRegister;
 import com.knongdai.account.entities.forms.UserInfo;
 import com.knongdai.account.entities.forms.UserLogin;
@@ -40,6 +41,10 @@ public interface UserService {
 	public boolean insertUserMobile(FrmUserRegister user);
 	
 	public UserInfo findUserByUserIdMobile(int userId);
+		
+	public boolean updateUser(FrmUpdateUser user);
+	
+	public UserInfo findUserByUserEmailMobile(UserLogin userLogin);
 	
 	
 }

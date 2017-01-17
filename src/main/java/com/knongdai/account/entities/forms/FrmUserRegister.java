@@ -1,9 +1,11 @@
 package com.knongdai.account.entities.forms;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.wordnik.swagger.annotations.ApiModelProperty;
 
 public class FrmUserRegister {
 
+    @ApiModelProperty(hidden = true)
 	@JsonProperty("USER_ID")
 	private int userId;
 	
@@ -29,6 +31,7 @@ public class FrmUserRegister {
 	private String userImageUrl;
 
 	// new field store verification_code ((Ean Sokchomrern, 15/09/2016)
+	@ApiModelProperty(hidden = true)
 	@JsonProperty("VERIFICATION_CODE")
 	private String verification_code;
 

@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.knongdai.account.entities.User;
 import com.knongdai.account.services.UserService;
+import com.mangofactory.swagger.annotations.ApiIgnore;
 
 @Controller
+@ApiIgnore
 public class AutoLoginController {
 
 	@Autowired

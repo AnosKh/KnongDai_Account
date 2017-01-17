@@ -16,7 +16,7 @@ public class FrmSocailUser {
 	@JsonProperty("GENDER")
 	private String gender;
 	
-	@JsonProperty("USER_IAMGE_URL")
+	@JsonProperty("USER_IMAGE_URL")
 	private String userImageUrl;
 	
 	@JsonProperty("POINT")

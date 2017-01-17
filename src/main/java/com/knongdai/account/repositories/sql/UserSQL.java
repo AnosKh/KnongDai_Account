@@ -118,6 +118,7 @@ public interface UserSQL {
 	String R_USER_BY_EMAIL_AND_PASSWORD="SELECT"
 			+ "		U.userid,"
 			+ " 	U.email,"
+			+ " 	U.username,"
 			+ " 	U.gender,"
 			+ " 	U.dateofbirth,"
 			+ " 	U.phonenumber,"
@@ -126,15 +127,16 @@ public interface UserSQL {
 			+ " 	U.point,"
 			+ "		U.universityid,"
 			+ " 	U.departmentid,"
-			+ "     U.user_hash"
+			+ "     U.user_hash,"
+			+ "     U.status "
 			+ " FROM"
 			+ " 	tbluser U"
 			+ " WHERE"
-			+ " 	U.email = #{email} AND U.password = #{password} AND status = '1'";
+			+ " 	U.email = #{email} AND U.password = #{password}";
 	
 	String C_USER_REGISTER_MOBILE = " INSERT INTO tbluser (userid, email, username, password, gender, registerdate, status , userimageurl,  signup_with , verification_code) "+ 
-			" VALUES(nextval('seq_user'), #{email}, #{username}, #{password}, #{gender}, now(),'1' , #{userImageUrl} ,  #{signUpWith} , #{verification_code} ) "; 
+			" VALUES(nextval('seq_user'), #{email}, #{username}, #{password}, #{gender}, now(),'0' , #{userImageUrl} ,  #{signUpWith} , #{verification_code} ) "; 
 	
-
+	String U_UPDATE_USER = "UPDATE tbluser SET username = #{username} , gender = #{gender}  , dateofbirth  = #{dateOfBirth} , phonenumber  = #{phonenumber}  , userimageurl  = #{userImageUrl} WHERE userid = #{userId} ";
 
 }

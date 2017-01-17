@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.knongdai.account.entities.User;
 import com.knongdai.account.entities.UserRegister;
 import com.knongdai.account.entities.forms.FrmSocailUser;
+import com.knongdai.account.entities.forms.FrmUpdateUser;
 import com.knongdai.account.entities.forms.FrmUserRegister;
 import com.knongdai.account.entities.forms.UserInfo;
 import com.knongdai.account.entities.forms.UserLogin;
@@ -94,6 +95,18 @@ public class UserServiceImpl implements UserService {
 	public UserInfo findUserByUserIdMobile(int userId) {
 		// TODO Auto-generated method stub
 		return userRepository.findUserByUserIdMobile(userId);
+	}
+
+	@Override
+	public boolean updateUser(FrmUpdateUser user) {
+		// TODO Auto-generated method stub
+		return userRepository.updateUser(user);
+	}
+
+	@Override
+	public UserInfo findUserByUserEmailMobile(UserLogin userLogin) {
+		// TODO Auto-generated method stub
+		return userRepository.findUserByUserEmailMobile(userLogin.getEmail());
 	}
 
 

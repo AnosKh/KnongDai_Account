@@ -16,6 +16,7 @@ import com.knongdai.account.entities.Role;
 import com.knongdai.account.entities.User;
 import com.knongdai.account.entities.UserRegister;
 import com.knongdai.account.entities.forms.FrmSocailUser;
+import com.knongdai.account.entities.forms.FrmUpdateUser;
 import com.knongdai.account.entities.forms.FrmUserRegister;
 import com.knongdai.account.entities.forms.UserInfo;
 import com.knongdai.account.entities.forms.UserLogin;
@@ -181,4 +182,24 @@ public interface UserRepository {
 			)
 	})
 	public UserInfo findUserByUserIdMobile(int userid);
+	
+	@Select(UserSQL.R_USER_BY_EMAIL)
+	@Results(value={
+			@Result(property="userId" , column="userid"),
+			@Result(property="email" , column="email"),
+			@Result(property="username" , column="username"),
+			@Result(property="gender" , column="gender"),
+			@Result(property="phonenumber" , column="phonenumber"),
+			@Result(property="registeredDate" , column="registerdate"),
+			@Result(property="userImageUrl" , column="userimageurl"),
+			@Result(property="point" , column="point"),
+			@Result(property="userHash" , column="user_hash"),
+			@Result(property="roles" , column="userid" ,
+					many = @Many(select = "findRolesByUserId")
+			)
+	})
+	public UserInfo findUserByUserEmailMobile(String email);
+	
+	@Update(UserSQL.U_UPDATE_USER)
+	public boolean updateUser(FrmUpdateUser user);
 }

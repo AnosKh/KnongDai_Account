@@ -24,9 +24,11 @@ import com.knongdai.account.utilities.HttpCode;
 import com.knongdai.account.utilities.HttpMessage;
 import com.knongdai.account.utilities.ResponseRecord;
 import com.knongdai.account.utilities.UtilSendMail;
+import com.mangofactory.swagger.annotations.ApiIgnore;
 
 import scala.annotation.meta.setter;
 
+@ApiIgnore
 @RestController
 @RequestMapping("/knongdai/user")
 public class ApiUserController {

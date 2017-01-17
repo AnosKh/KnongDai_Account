@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.knongdai.account.entities.SendMail;
 import com.knongdai.account.entities.User;
 import com.knongdai.account.entities.forms.FrmSocailUser;
+import com.knongdai.account.entities.forms.FrmUpdateUser;
 import com.knongdai.account.entities.forms.FrmUserRegister;
 import com.knongdai.account.entities.forms.UserInfo;
 import com.knongdai.account.entities.forms.UserLogin;
@@ -49,14 +50,14 @@ public class ApiAuthentication {
 			// TODO : Find user by email. If user existed It will login else Sign up and Login.
 			UserLogin userLogin = new UserLogin();
 			userLogin.setEmail(scoialUser.getEmail());
-			User user = userService.findUserByEmail(userLogin);
-			
+			UserInfo user = userService.findUserByUserEmailMobile(userLogin);
+
 			if(user != null){
 				// Login
 				System.out.println("Login");
 				map.put("MESSAGE", "Logined success!");
-				map.put("STATUS", true);
-				map.put("USER", user);
+				map.put("STATUS_LOGIN", true);
+				map.put("DATA", user);
 			}else{
 				// Sign up
 				System.out.println("Login & Sign up");
@@ -64,12 +65,12 @@ public class ApiAuthentication {
 				scoialUser.setPassword(password);
 				if(userService.insertUserWithScoial(scoialUser)){
 					// Login
-					map.put("MESSAGE", "Logined & Signed up success!");
-					map.put("STATUS", true);
-					map.put("USER", userService.findUserByEmail(userLogin));
+					map.put("MESSAGE", "You have been registered successfully.");
+					map.put("STATUS_SIGNUP", true);
+					map.put("DATA", userService.findUserByUserEmailMobile(userLogin));
 				}else{
-					map.put("MESSAGE", "Sign up unsuccess!");
-					map.put("STATUS", false);
+					map.put("MESSAGE", "Login & Sign up unsuccess!");
+					map.put("STATUS_SIGNUP", false);
 				}
 				
 			}
@@ -91,9 +92,22 @@ public class ApiAuthentication {
 				map.put("MESSAGE", "Incorrect username or passwrd!");
 				map.put("STATUS", false);
 			}else{
-				map.put("MESSAGE", "Login success!");
-				map.put("STATUS", true);
-				map.put("DATA", user);
+				// 0: Inactive, 1: Active, 2: Deleted, 3: Locked
+				if(user.getStatus().equalsIgnoreCase("0")){
+					map.put("MESSAGE", "Your account is inactive! Please go to your email to active your account!");
+					map.put("STATUS", false);
+				}else if(user.getStatus().equalsIgnoreCase("1")){
+					map.put("MESSAGE", "Login success!");
+					map.put("STATUS", true);
+					map.put("DATA", user);
+				}else if(user.getStatus().equalsIgnoreCase("2")){
+					map.put("MESSAGE", "Your account has been deleted.");
+					map.put("STATUS", false);
+				}else if(user.getStatus().equalsIgnoreCase
+						("3")){
+					map.put("MESSAGE", "Your account is locked.");
+					map.put("STATUS", false);
+				}
 			}
 		}catch(Exception e){
 			map.put("MESSAGE", "OPERATION FAIL");
@@ -153,7 +167,7 @@ public class ApiAuthentication {
 				}
 			}else{
 				map.put("STATUS", false);
-				map.put("MESSAGE", "You’ve already registered with that email address.");
+				map.put("MESSAGE", "You’ve already registered with that email address. Please login");
 			}
 		} catch(Exception e){
 			map.put("STATUS", false);
@@ -164,6 +178,23 @@ public class ApiAuthentication {
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
 	
-	
+	@RequestMapping(value="/mobile/update-user" , method = RequestMethod.POST , headers = "Accept=application/json")
+	public ResponseEntity<Map<String , Object>>  updateUser(@RequestBody FrmUpdateUser user){
+		Map<String, Object> map = new HashMap<String , Object>();
+		try{
+			if(userService.updateUser(user)){
+				map.put("MESSAGE", "User has been updated!");
+				map.put("STATUS", true);
+			}else{
+				map.put("MESSAGE", "User has not been updated!");
+				map.put("STATUS", false);
+			}
+		}catch(Exception e){
+			map.put("MESSAGE", "OPERATION FAIL");
+			map.put("STATUS", false);
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Map<String , Object>>(map , HttpStatus.OK);
+	}
 
 }

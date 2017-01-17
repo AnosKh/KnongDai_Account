@@ -42,7 +42,9 @@ import com.knongdai.account.entities.User;
 import com.knongdai.account.entities.forms.FrmSocailUser;
 import com.knongdai.account.entities.forms.UserLogin;
 import com.knongdai.account.services.UserService;
+import com.mangofactory.swagger.annotations.ApiIgnore;
 
+@ApiIgnore
 @Controller
 @RequestMapping(value = "/twitter")
 public class TwitterContoller {

@@ -18,7 +18,9 @@ import org.springframework.web.client.RestTemplate;
 import com.knongdai.account.entities.SendMail;
 import com.knongdai.account.entities.UserRegister;
 import com.knongdai.account.entities.forms.UserLogin;
+import com.mangofactory.swagger.annotations.ApiIgnore;
 
+@ApiIgnore
 @RestController
 public class RestUserController {
 
