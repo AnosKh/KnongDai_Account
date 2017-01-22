@@ -195,6 +195,10 @@ public class FaceBookController {
 			e.printStackTrace();
 		}
 		
+		
+		
+		
+		
 		userScoial.setUsername(obj.getString("name"));
 		userScoial.setGender(obj.getString("gender"));
 		userScoial.setUserImageUrl("http://graph.facebook.com/" + obj.getString("id") + "/picture?type=large");
